@@ -45,25 +45,33 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 
 ## B02 — Actualización
 
-- **Qué queremos comprobar:** la versión 2 se publica mediante PR aprobado y el cambio se ve en la URL pública.
-- **Versión y estado inicial:** v1.0.0 publicada (commit `a1c62ac`).
-- **Pasos para repetirla:** [PROCEDIMIENTOS.md §3](PROCEDIMIENTOS.md).
-- **Resultado esperado:** la URL muestra "Versión 2", la experiencia "Ruta de espacios verdes" y el pie "v2.0.0", con estilos.
-- **Cómo se hizo:**
-  1. **andrezg876-lang** (colaborador con permiso de actualización) copió `sitio_v2/index.html` en `docs/index.html` desde su fork. Commit `8c1a644` a las 11:24:31 a. m.
-  2. Abrió el **PR #4 "mi version 2, andres"** a las 11:25:41 a. m.
-  3. **thomasT-maker** (admin/revisor) lo **aprobó** a las 11:30:04 a. m. y hizo el **merge** a las 11:30:15 a. m. La regla `proteger-main` exigió esa aprobación.
-  4. GitHub Pages volvió a publicar automáticamente al cambiar `main`.
-- **Resultado observado (21/11/2026 ≈ 11:41 a. m.):** la URL pública muestra ✅ "Versión 2", ✅ la nueva experiencia "Ruta de espacios verdes", ✅ las dos experiencias anteriores y ✅ el título morado (`styles.css` responde HTTP 200). ❌ El pie **no** muestra "v2.0.0": se usó `sitio_v2/index.html` tal cual, sin la marca de versión que definió el equipo.
-- **Inicio, fin y duración:** 11:24:31 a. m. (commit) → 11:30:15 a. m. (merge aprobado) → verificación en la URL ≈ 11:41 a. m. Del commit al merge: **≈ 6 min**, en su mayoría a la espera de la aprobación.
+- **Qué queremos comprobar:** la versión 2 se publica por PR y el cambio se ve en la URL.
+- **Quién la hizo:** `andrezg876-lang` propuso el cambio; `thomasT-maker` (admin) lo revisó, aprobó e hizo el merge.
+- **Versión y estado inicial:** v1.0.0 publicada (commit `a1c62ac`). El respaldo B03 todavía no se había hecho al momento de actualizar.
+- **Pasos realizados:**
+  1. El integrante reemplazó `docs/index.html` por el contenido de `sitio_v2/index.html` y abrió el **[PR #4](https://github.com/thomasT-maker/Infra-Nube-Proyecto-Estud-IA/pull/4)** ("mi version 2, andres") desde su propia copia (*fork*) del repositorio. Cambió solo 1 archivo (`docs/index.html`); `styles.css` es igual en v1 y v2.
+  2. El admin revisó el cambio y lo **aprobó**. La regla `proteger-main` exige 1 aprobación antes del merge.
+  3. Merge a `main` (commit `2676ef1`) y despliegue automático de GitHub Pages.
+  4. Verificación en el navegador sobre la URL pública.
+- **Resultado esperado:** la URL muestra "Versión 2", "Ruta de espacios verdes" y el pie "v2.0.0"; existe el tag `v2.0.0`.
+- **Resultado observado:** la URL pública muestra ✅ "Versión 2", ✅ la nueva experiencia **Ruta de espacios verdes** (3 experiencias en total) y ✅ el título en morado (los estilos cargan). ⚠️ El pie **no** muestra "v2.0.0", porque se copió `sitio_v2/index.html` tal cual, sin agregar la marca que sí tiene la v1.
+- **Tiempos (21/11/2026, hora de Colombia):**
+
+  | Momento | Hora |
+  |---|---|
+  | PR #4 creado | 11:25:41 |
+  | Aprobación del admin | 11:30:04 |
+  | Merge a `main` | 11:30:15 |
+  | Pages: despliegue iniciado → terminado | 11:30:18 → 11:30:39 |
+  | **Del PR al sitio actualizado** | **≈ 5 min** (de los cuales ~4 min 20 s fueron la espera de la aprobación y 24 s el merge y el despliegue) |
+
 - **Evidencia:**
 
   ![B02: versión 2 publicada](evidencias/B02_v2_publicada.png)
 
-- **¿Cumple?** Sí, para lo que exige la guía (la versión 2 se publicó y el cambio es visible). Queda un ajuste propio pendiente: la marca `v2.0.0` en el pie.
-- **Error encontrado y ajuste:** falta `<br><small>v2.0.0</small>` antes de `</footer>` en `docs/index.html`. Se corrige con un PR pequeño y luego se crea el tag `v2.0.0` sobre ese merge.
-- **Resultado al repetir la prueba:** *[completar después del ajuste]*
-- **Nota:** el PR #6 (nota de prueba en el README, de juanpati913-sketch) también pasó por aprobación; generó otro despliegue a las 11:40:59 a. m. sin cambiar el sitio.
+- **¿Cumple?** Sí, con observación: el contenido v2 está publicado y se ve en la URL, pero falta la marca `v2.0.0` en el pie y el tag `v2.0.0`.
+- **Error encontrado y ajuste:** (1) el pie quedó sin `v2.0.0`; se corrige con un PR pequeño que agregue `<br><small>v2.0.0</small>` antes de `</footer>` en `docs/index.html`. (2) Falta crear el tag `v2.0.0` sobre el commit publicado.
+- **Resultado al repetir la prueba:** *[completar]*
 
 ## B03 — Respaldo
 
