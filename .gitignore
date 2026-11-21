@@ -1,0 +1,18 @@
+# Material de los organizadores: se guarda en Google Drive, no en el repo
+*.pdf
+
+# Carpetas que genera scripts/herramientas.py
+trabajo/
+respaldos/
+*.zip
+
+# Nunca subir credenciales
+.env
+*.key
+*.pem
+
+# Sistema operativo y editores
+.DS_Store
+Thumbs.db
+.vscode/
+__pycache__/
