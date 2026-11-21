@@ -45,16 +45,25 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 
 ## B02 — Actualización
 
-- **Qué queremos comprobar:** la versión 2 se publica por PR y el cambio se ve en la URL.
-- **Versión y estado inicial:** v1.0.0 publicada; respaldo B03 hecho.
+- **Qué queremos comprobar:** la versión 2 se publica mediante PR aprobado y el cambio se ve en la URL pública.
+- **Versión y estado inicial:** v1.0.0 publicada (commit `a1c62ac`).
 - **Pasos para repetirla:** [PROCEDIMIENTOS.md §3](PROCEDIMIENTOS.md).
-- **Resultado esperado:** la URL muestra "Versión 2", "Ruta de espacios verdes" y el pie "v2.0.0"; existe el tag `v2.0.0`.
-- **Resultado observado:** *[completar]*
-- **Inicio, fin y duración:** *[completar]*
-- **Evidencia:** *[completar: enlace al PR + evidencias/B02_v2.png]*
-- **¿Cumple?** *[completar]*
-- **Error encontrado y ajuste:** *[completar]*
-- **Resultado al repetir la prueba:** *[completar]*
+- **Resultado esperado:** la URL muestra "Versión 2", la experiencia "Ruta de espacios verdes" y el pie "v2.0.0", con estilos.
+- **Cómo se hizo:**
+  1. **andrezg876-lang** (colaborador con permiso de actualización) copió `sitio_v2/index.html` en `docs/index.html` desde su fork. Commit `8c1a644` a las 11:24:31 a. m.
+  2. Abrió el **PR #4 "mi version 2, andres"** a las 11:25:41 a. m.
+  3. **thomasT-maker** (admin/revisor) lo **aprobó** a las 11:30:04 a. m. y hizo el **merge** a las 11:30:15 a. m. La regla `proteger-main` exigió esa aprobación.
+  4. GitHub Pages volvió a publicar automáticamente al cambiar `main`.
+- **Resultado observado (21/11/2026 ≈ 11:41 a. m.):** la URL pública muestra ✅ "Versión 2", ✅ la nueva experiencia "Ruta de espacios verdes", ✅ las dos experiencias anteriores y ✅ el título morado (`styles.css` responde HTTP 200). ❌ El pie **no** muestra "v2.0.0": se usó `sitio_v2/index.html` tal cual, sin la marca de versión que definió el equipo.
+- **Inicio, fin y duración:** 11:24:31 a. m. (commit) → 11:30:15 a. m. (merge aprobado) → verificación en la URL ≈ 11:41 a. m. Del commit al merge: **≈ 6 min**, en su mayoría a la espera de la aprobación.
+- **Evidencia:**
+
+  ![B02: versión 2 publicada](evidencias/B02_v2_publicada.png)
+
+- **¿Cumple?** Sí, para lo que exige la guía (la versión 2 se publicó y el cambio es visible). Queda un ajuste propio pendiente: la marca `v2.0.0` en el pie.
+- **Error encontrado y ajuste:** falta `<br><small>v2.0.0</small>` antes de `</footer>` en `docs/index.html`. Se corrige con un PR pequeño y luego se crea el tag `v2.0.0` sobre ese merge.
+- **Resultado al repetir la prueba:** *[completar después del ajuste]*
+- **Nota:** el PR #6 (nota de prueba en el README, de juanpati913-sketch) también pasó por aprobación; generó otro despliegue a las 11:40:59 a. m. sin cambiar el sitio.
 
 ## B03 — Respaldo
 
