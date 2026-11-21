@@ -27,6 +27,7 @@ documentacion/     Procedimientos, permisos, esquema y bitácora de pruebas
 - [Permisos: lectura, actualización y administración](documentacion/PERMISOS.md)
 - [Esquema de infraestructura](documentacion/ESQUEMA.md)
 - [Bitácora de pruebas B01–B06](documentacion/BITACORA.md)
+- [Plan de pruebas por Pull Request (quién hace cada prueba)](documentacion/PLAN_PRUEBAS.md)
 
 ## Por qué GitHub Pages
 
