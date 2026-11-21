@@ -59,18 +59,14 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 ## B03 — Respaldo
 
 - **Qué queremos comprobar:** existe una copia íntegra, fuera de GitHub, con ubicación, versión y archivos identificados.
-- **Versión y estado inicial:** v1.0.0, la versión publicada (copia exacta de `docs/`), antes de actualizar a v2.
+- **Versión y estado inicial:** *[completar: versión respaldada]*
 - **Pasos para repetirla:** [PROCEDIMIENTOS.md §2](PROCEDIMIENTOS.md).
 - **Resultado esperado:** ZIP en Drive con `index.html`, `styles.css` y `manifest.json`.
-- **Ruta del respaldo local:** `respaldos/20261121_103128_314031` (21/11/2026, 10:31 a. m.)
-- **Archivos incluidos:** `index.html`, `styles.css`, `manifest.json` (SHA-256 de cada archivo).
-- **Ubicación en Drive y quién tiene acceso:** carpeta **"Ruta Local - Respaldos (EstudIA)"** en el Drive del admin, archivo `respaldo_v1.0.0_20261121_103128_314031.zip` (1564 bytes). Por ahora solo el admin tiene acceso. *[completar: compartir con los integrantes del equipo, sin enlace público]*
-- **Resultado observado:** las huellas SHA-256 del manifiesto coinciden con los archivos publicados en `docs/`. El tamaño del ZIP en Drive coincide con el local. La copia está fuera de GitHub, el lugar que puede fallar.
-- **Evidencia:**
-
-  ![B03: respaldo v1 con manifiesto y copia en Drive](evidencias/B03_respaldo_v1.png)
-
-- **¿Cumple?** Sí (pendiente compartir la carpeta con el equipo)
+- **Ruta del respaldo local:** *[completar: respaldos/AAAAMMDD_HHMMSS_…]*
+- **Ubicación en Drive y quién tiene acceso:** *[completar]*
+- **Resultado observado:** *[completar]*
+- **Evidencia:** *[completar]*
+- **¿Cumple?** *[completar]*
 
 ## B04 — Recuperación
 
@@ -93,17 +89,9 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 - **Qué queremos comprobar:** lectura, actualización y administración están separadas.
 - **Pasos para repetirla:** [PERMISOS.md, "Cómo demostrarlo"](PERMISOS.md).
 - **Resultado esperado:** sin sesión se ve el sitio y no se edita; un push directo a `main` y el borrado de un tag `v*` son rechazados; solo el admin ve la configuración.
-- **Resultado observado (21/11/2026, 10:32–10:33 a. m.):**
-  - **Lectura:** sin sesión se ve el sitio publicado (ver B01). La configuración del repositorio responde **404** para el visitante anónimo.
-  - **Actualización:** con una cuenta con escritura, `git push` directo a `main` fue **rechazado** ("Changes must be made through a pull request"). El merge del PR #2 sin aprobación también fue **rechazado** ("At least 1 approving review is required").
-  - **Administración:** rulesets activos, configurados por el admin: `proteger-main` (rama por defecto: no borrar, no force push, PR con 1 aprobación) y `proteger-versiones` (tags `v*`: no borrar, no modificar, no force push). Ninguno tiene excepciones (*bypass*), así que ni el admin puede saltárselos.
-- **Evidencia (sin credenciales):**
-
-  ![B05: lectura sin sesión, configuración 404](evidencias/B05_sin_sesion_configuracion.png)
-
-  ![B05: push directo y merge sin aprobación rechazados](evidencias/B05_reglas_actualizacion.png)
-
-- **¿Cumple?** Parcial: falta probar que borrar un tag `v*` es rechazado (se hace cuando exista `v1.0.0`).
+- **Resultado observado:** *[completar]*
+- **Evidencia (sin credenciales):** *[completar]*
+- **¿Cumple?** *[completar]*
 - **Limitación:** en repo personal no hay rol "solo lectura" dentro de GitHub; ver PERMISOS.md.
 
 ## B06 — Repetibilidad
