@@ -36,3 +36,4 @@ documentacion/     Procedimientos, permisos, esquema y bitácora de pruebas
 - Con PR obligatorio y revisor, se separa quién propone cambios de quién los aprueba.
 
 **Limitaciones:** el repositorio debe ser público; la caché de Pages tarda unos 10 minutos en renovarse; y si GitHub falla, el respaldo de Drive sirve para volver a publicar en otro alojamiento.
+Prueba de commit
