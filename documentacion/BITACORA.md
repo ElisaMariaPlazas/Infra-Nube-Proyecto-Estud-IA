@@ -24,16 +24,24 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 - **Versión y estado inicial:** v1.0.0 en `docs/` de `main`; Pages recién activado.
 - **Pasos para repetirla:** [PROCEDIMIENTOS.md §0 y §1](PROCEDIMIENTOS.md).
 - **Resultado esperado:** la URL muestra "Versión 1", el pie "v1.0.0" y el título en morado, desde ventana privada y en un navegador distinto al de configuración.
-- **Resultado observado:** desde el navegador integrado de la app de Claude, **sin sesión de GitHub** (consulta pública), la URL responde HTTP 200 y muestra "Versión 1", el pie "v1.0.0" y el título en morado. `styles.css` responde HTTP 200. Encabezados: `Last-Modified: 21/11/2026 10:07:09 a. m.` (hora de Colombia) y `Cache-Control: max-age=600`, que confirma la caché de 10 minutos.
+- **Resultado observado:**
+  1. **Verificación del equipo (navegador del integrante, 21/11/2026 ≈ 11:10 a. m.):** la URL pública abre y muestra ✅ "Versión 1", ✅ el pie "v1.0.0", ✅ el título "Ruta Local" en morado (los estilos cargan) y ✅ las dos experiencias: *Recorrido por las historias del barrio* y *Taller de oficios y memoria*.
+  2. **Verificación complementaria sin sesión (10:30 a. m.):** desde un navegador sin sesión de GitHub, la URL responde HTTP 200 y `styles.css` responde HTTP 200. Encabezados: `Last-Modified` 10:07:09 a. m. (hora en que Pages publicó) y `Cache-Control: max-age=600` (caché de 10 minutos).
 - **URL:** https://thomast-maker.github.io/Infra-Nube-Proyecto-Estud-IA/
-- **Inicio, fin y duración:** Pages publicó a las 10:07 a. m.; verificación a las 10:30 a. m. del 21/11/2026.
+- **Inicio, fin y duración:** Pages publicó a las 10:07 a. m.; verificaciones a las 10:30 a. m. y ≈ 11:10 a. m. del 21/11/2026.
 - **Evidencia:**
 
-  ![B01: versión 1 publicada](evidencias/B01_v1_publicada.png)
+  Captura del equipo, con la barra de direcciones visible:
+
+  ![B01: versión 1 publicada, captura del equipo](evidencias/B01_v1_publicada.png)
+
+  Verificación complementaria sin sesión, con una franja agregada que indica la URL, la hora y los encabezados HTTP:
+
+  ![B01: verificación sin sesión](evidencias/B01_v1_verificacion_sin_sesion.png)
 
 - **¿Cumple?** Sí
-- **Error encontrado y ajuste:** la captura del navegador integrado no muestra la barra de direcciones; se agregó una franja con la URL, la fecha y la hora. Pendiente: tag `v1.0.0` sobre el commit publicado `a1c62ac` (desde el entorno de Claude no se permite crear tags; lo crea el admin).
-- **Resultado al repetir la prueba:** *[completar cuando otro integrante lo abra en ventana privada]*
+- **Error encontrado y ajuste:** ninguno en la publicación. Pendiente: crear el tag `v1.0.0` sobre el commit publicado `a1c62ac` (*Merge pull request #1*) como punto de recuperación.
+- **Resultado al repetir la prueba:** se repitió en dos navegadores distintos (el del integrante y uno sin sesión de GitHub) con el mismo resultado.
 
 ## B02 — Actualización
 
