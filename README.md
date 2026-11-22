@@ -35,4 +35,5 @@ documentacion/     Procedimientos, permisos, esquema y bitácora de pruebas
 - Git guarda cada versión publicada, y los tags `v1.0.0` y `v2.0.0` marcan los puntos de recuperación.
 - Con PR obligatorio y revisor, se separa quién propone cambios de quién los aprueba.
 
-**Limitaciones:** el repositorio debe ser público; la caché de Pages tarda unos 10 minutos en renovarse; y si GitHub falla, el respaldo de Drive sirve para volver a publicar en otro alojamiento....
+**Limitaciones:** el repositorio debe ser público; la caché de Pages tarda unos 10 minutos en renovarse; y si GitHub falla, el respaldo de Drive sirve para volver a publicar en otro alojamiento.
+Prueba de commit
