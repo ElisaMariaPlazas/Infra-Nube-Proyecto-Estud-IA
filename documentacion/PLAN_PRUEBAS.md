@@ -1,62 +1,73 @@
 # Plan de pruebas por Pull Request
 
-**Regla del equipo:** cada prueba entra a `main` por un Pull Request (PR) que hace **un integrante** y que **aprueba y fusiona el admin** (`thomasT-maker`). Nadie escribe directo en `main`; la regla `proteger-main` lo impide.
+**Regla:** cada prueba entra a `main` por un Pull Request (PR). Lo **abre la cuenta de pruebas** y lo **aprueba y fusiona la cuenta admin**. Nadie escribe directo en `main`; la regla `proteger-main` lo impide y exige 1 aprobación de **otra** cuenta con permiso de escritura.
 
-> Los PR que abra el propio admin los aprueba otro integrante, porque GitHub no deja que el autor apruebe su propio PR.
+| Papel | Cuenta | Permiso en el repo | Qué hace |
+|---|---|---|---|
+| **Pruebas** | `tabordathomas-maker` | Colaborador (escritura) | Crea ramas, cambia archivos, abre los PR, toma capturas, llena la bitácora |
+| **Admin / revisor** | `thomasT-maker` | Dueño (administración) | Revisa, aprueba y fusiona; crea tags; configura Pages, reglas y Drive |
 
-## Reparto
+> **Transparencia:** las dos cuentas son de la misma persona (Thomas). Lo que se demuestra es la **separación de permisos** (quien propone no puede publicar sin aprobación de otra cuenta), no la separación de personas. Se declara así en la bitácora y en la demo.
 
-| Orden | Prueba | Responsable | PR(s) que abre | Estado |
+---
+
+## Preparación (una sola vez)
+
+1. **Admin:** Settings → **Collaborators** → **Add people** → `tabordathomas-maker` → rol de escritura.
+2. **Cuenta de pruebas:** aceptar la invitación (https://github.com/notifications).
+3. **Dos navegadores**, para no confundir las sesiones:
+   - Navegador A (por ejemplo **Chrome**): sesión de **`thomasT-maker`** → solo aprobar y fusionar.
+   - Navegador B (por ejemplo **Edge**): sesión de **`tabordathomas-maker`** → abrir PR.
+   - Para verificar el sitio: **ventana privada** (sin sesión).
+4. **Admin:** compartir la carpeta de Drive "Ruta Local - Respaldos (EstudIA)" con el correo de la cuenta de pruebas (sin enlace público).
+
+## Orden de trabajo
+
+| # | Qué | Abre el PR (B) | Aprueba y fusiona (A) | Después |
 |---|---|---|---|---|
-| 0 | Integrar bitácora y plan | `thomasT-maker` (lo aprueba un compañero) | 1 PR: rama `pruebas-b01-b06` | ⏳ |
-| 1 | B01 Publicación | `thomasT-maker` | — (ya registrada) | ✅ |
-| 2 | B02 Actualización | `andrezg876-lang` | PR #4 (ya fusionado) + 1 PR para corregir el pie `v2.0.0` | 🟡 |
-| 3 | B03 Respaldo | `juanpati913-sketch` | 1 PR de evidencia | ⏳ |
-| 4 | B04 Recuperación | `simoncs02` | 3 PR: error → revert → evidencia | ⏳ |
-| 5 | B05 Permisos | `andrezg876-lang` | 1 PR de evidencia | ⏳ |
-| 6 | B06 Repetibilidad | `juanpati913-sketch` | 3 PR: error → revert → evidencia | ⏳ |
-
-Después del paso 2, el **admin** crea los tags `v1.0.0` (sobre *Merge pull request #1*) y `v2.0.0` (sobre el merge de la corrección del pie), en **Releases → Draft a new release**.
-
----
-
-## Antes de empezar (cada integrante)
-
-1. Aceptar la invitación de colaborador del repositorio (correo o https://github.com/notifications). Así se trabaja con ramas dentro del repo, sin *fork*.
-2. Leer `documentacion/PROCEDIMIENTOS.md`.
-3. Tomar las capturas con **Win+Shift+S**, con la **barra de direcciones visible**, y guardarlas con el nombre indicado.
-4. **Nunca** incluir contraseñas, tokens ni capturas de credenciales.
-
-## Cómo se hace un PR de evidencia (igual para todos)
-
-1. Repo → `documentacion/evidencias` → **Add file → Upload files** → arrastrar las capturas.
-2. Abajo, **Create a new branch** con el nombre `prueba-bXX-usuario` → **Propose changes**. *No crear todavía el PR.*
-3. En esa misma rama, abrir `documentacion/BITACORA.md` → lápiz ✏️ → **editar solo la sección de su prueba**: llenar los `[completar]` y pegar las imágenes así:
-   ```
-   ![B03: respaldo de la versión 2](evidencias/B03_respaldo_v2.png)
-   ```
-   **Commit directly to the `prueba-bXX-usuario` branch.**
-4. **Compare & pull request** → título `BXX: <qué se hizo>` → en *Reviewers* elegir `thomasT-maker` → **Create pull request**.
-5. Si GitHub dice *"This branch has conflicts"* (porque otro PR de bitácora entró antes), clic en **Resolve conflicts**, dejar ambas secciones y **Mark as resolved**.
+| 0 | Integrar bitácora y plan | — (es el PR #7, de la cuenta admin) | **La cuenta de pruebas aprueba**; el admin fusiona | — |
+| 0b | PR #5 (mejora de `PROCEDIMIENTOS.md`) | — | Admin aprueba y fusiona | Debe entrar **antes de B06** |
+| 1 | **B01** Publicación | — | — | ✅ Ya registrada |
+| 2 | **B02** Corregir el pie `v2.0.0` | `prueba-b02-pie` | ✔ | Admin crea tags `v1.0.0` y `v2.0.0` |
+| 3 | **B03** Respaldo de la v2 | `prueba-b03-respaldo` (evidencia) | ✔ | — |
+| 4 | **B04** Error → recuperación | 3 PR: error, revert, evidencia | ✔ los 3, rápido | ⏱ se mide el tiempo |
+| 5 | **B05** Permisos | `prueba-b05-permisos` (evidencia) | ✔ | — |
+| 6 | **B06** Repetibilidad | ver nota | ✔ | — |
+| 7 | Cierre de la bitácora | `cierre-bitacora` | ✔ | Borrar ramas fusionadas |
 
 ---
 
-## Paso 0 — Integrar la bitácora y este plan
+## Cómo se hace un PR (siempre igual)
 
-- **Admin:** abre el PR de la rama `pruebas-b01-b06` hacia `main`.
-- **Cualquier compañero:** **Files changed → Review changes → Approve**.
-- **Admin:** **Merge**. A partir de aquí todos editan la bitácora que está en `main`.
+**En el navegador B (cuenta de pruebas):**
+1. Ir al archivo → lápiz ✏️ (o, para imágenes: `documentacion/evidencias` → **Add file → Upload files**).
+2. **Commit changes…** → **Create a new branch** → nombre de la tabla → **Propose changes** → **Create pull request**.
+3. Para agregar más archivos a la misma rama: cambiar a esa rama (selector de ramas, arriba a la izquierda) y hacer commit **directamente en ella**.
 
-## Paso 2 — B02: corregir el pie (`andrezg876-lang`)
+**En el navegador A (admin):**
+4. PR → **Files changed** → revisar con la lista de revisión (abajo) → **Review changes → Approve → Submit review**.
+5. **Conversation** → **Merge pull request** → **Confirm merge**.
+6. Si el PR tocó `docs/`: pestaña **Actions** ✅ → verificar el sitio en **ventana privada**.
 
-1. Rama `prueba-b02-pie`: editar `docs/index.html` y agregar `<br><small>v2.0.0</small>` justo antes de `</footer>`.
-2. En la misma rama, completar en la bitácora B02 el *Resultado al repetir la prueba* y cambiar la observación del pie a corregida.
-3. PR → admin aprueba y fusiona → verificar en ventana privada que el pie dice `v2.0.0`.
-4. Captura → `B02_v2_pie_corregido.png` (subirla en el mismo PR o en uno nuevo).
+---
 
-## Paso 3 — B03: respaldo de la versión 2 (`juanpati913-sketch`)
+## Paso 0 — Integrar la bitácora y este plan (PR #7)
+- **B:** PR #7 → **Files changed → Review changes → Approve**.
+- **A:** **Merge**. Desde aquí, la bitácora y este plan están en `main`.
 
-1. En su computador, dentro del repo clonado:
+## Paso 0b — PR #5 de Simón
+- **A:** PR #5 → revisar → **Approve → Merge**. (Completa §4.3 y §4.5 de `PROCEDIMIENTOS.md`; está correcto.)
+
+## Paso 2 — B02: corregir el pie
+1. **B**, rama `prueba-b02-pie`: en `docs/index.html` agregar `<br><small>v2.0.0</small>` justo antes de `</footer>`. En la misma rama, en `README.md`, borrar la última línea suelta: "Prueba de commit".
+2. **A**: aprobar → merge → Actions ✅ → ventana privada: el pie dice **v2.0.0**.
+3. **B**: captura `B02_v2_pie_corregido.png` → subirla y completar en la bitácora B02 *Resultado al repetir la prueba* (se puede hacer en el PR de B03 para no abrir uno extra).
+4. **A**: **Releases → Draft a new release**:
+   - `v1.0.0` → Target: *Recent commits* → **"Merge pull request #1…"** → Publish.
+   - `v2.0.0` → Target: **el merge de `prueba-b02-pie`** → Publish.
+
+## Paso 3 — B03: respaldo de la versión 2
+1. En el PC (terminal, dentro del repo clonado):
    ```
    git checkout main
    git pull
@@ -66,63 +77,76 @@ Después del paso 2, el **admin** crea los tags `v1.0.0` (sobre *Merge pull requ
    python scripts/herramientas.py respaldar
    type respaldos\NOMBRE_QUE_IMPRIMIÓ\manifest.json
    ```
-2. Comprimir la carpeta del respaldo → `respaldo_v2_FECHA.zip` → subir a Drive, carpeta **"Ruta Local - Respaldos (EstudIA)"** (el admin la comparte con el equipo).
-3. Capturas: `B03_respaldo_v2_terminal.png` (salida de `respaldar` y del manifiesto) y `B03_respaldo_v2_drive.png`.
-4. PR de evidencia: llenar la sección B03 de la bitácora con la ruta del respaldo, la versión, los archivos, la ubicación en Drive y quién tiene acceso.
-5. **No** subir la carpeta `respaldos/` ni el ZIP al repo: el respaldo debe quedar fuera de GitHub.
+2. Comprimir la carpeta del respaldo → `respaldo_v2_FECHA.zip` → subir a Drive, carpeta "Ruta Local - Respaldos (EstudIA)".
+3. Capturas: `B03_respaldo_v2_terminal.png` y `B03_respaldo_v2_drive.png`.
+4. **B**, rama `prueba-b03-respaldo`: subir las capturas y llenar la sección **B03** de la bitácora (ruta, versión, archivos, ubicación en Drive y quién tiene acceso). **No** subir el ZIP ni `respaldos/`.
+5. **A**: comprobar en Drive que el ZIP existe → aprobar → merge.
 
-## Paso 4 — B04: error y recuperación (`simoncs02`)
+> ⚠️ **B04 no empieza sin B03:** no se rompe el sitio sin tener un respaldo.
 
-Coordinar por llamada con el admin, porque el tiempo de espera de cada aprobación cuenta en la medición.
+## Paso 4 — B04: error y recuperación (con cronómetro)
 
-**PR 1 — provocar el error**
-1. Rama `prueba-b04-error`: reemplazar todo `docs/index.html` por:
+Tener abiertos los dos navegadores y una ventana privada con el sitio.
+
+**PR 1 — error**
+1. **B**, rama `prueba-b04-error`: reemplazar todo `docs/index.html` por:
    ```html
    <!doctype html><html lang="es"><meta charset="utf-8"><title>Error simulado</title><h1>Catálogo incorrecto</h1><p>Versión de error para practicar la restauración.</p></html>
    ```
-2. PR titulado `B04: error simulado` → admin aprueba y fusiona.
-3. Cuando el sitio muestre **"Catálogo incorrecto"** en ventana privada: **⏱ anotar la HORA DE INICIO** y tomar la captura `B04_error.png`.
+2. **A**: aprobar → merge.
+3. Ventana privada: cuando aparezca **"Catálogo incorrecto"** → **⏱ HORA DE INICIO** + captura `B04_error.png`.
 
 **PR 2 — recuperar**
-4. Abrir el PR 1 (ya fusionado) → botón **Revert** → **Create pull request** → admin aprueba y fusiona.
-5. Cuando el sitio vuelva a mostrar **Versión 2** con estilos y el pie `v2.0.0`: **⏱ anotar la HORA DE FIN** y tomar la captura `B04_recuperado.png`.
+4. **B**: abrir el PR 1 (ya fusionado) → botón **Revert** → **Create pull request**.
+5. **A**: aprobar → merge.
+6. Ventana privada: cuando vuelva **Versión 2** con estilos y el pie **v2.0.0** → **⏱ HORA DE FIN** + captura `B04_recuperado.png`.
 
 **PR 3 — evidencia**
-6. Llenar la sección B04 de la bitácora: error provocado, método (revert), hora de inicio, hora de fin, duración, versión recuperada, pasos manuales y cuáles automatizarían.
+7. **B**, rama `prueba-b04-evidencia`: subir las capturas y llenar **B04**: error provocado, método (*revert*), inicio, fin, **duración**, versión recuperada y qué pasos automatizarían.
+8. **A**: aprobar → merge.
 
-## Paso 5 — B05: permisos (`andrezg876-lang`)
-
-1. **Lectura:** en ventana privada, sin sesión, abrir el sitio (se ve) y `https://github.com/thomasT-maker/Infra-Nube-Proyecto-Estud-IA/settings` (debe dar **404**) → `B05_lectura_sin_sesion.png`.
-2. **Actualización bloqueada en `main`:** en una terminal con su cuenta:
-   ```
-   git checkout main
-   git pull
-   echo prueba >> README.md
-   git commit -am "Prueba B05: push directo"
-   git push origin main
-   ```
-   Debe ser **rechazado** ("Changes must be made through a pull request") → `B05_push_rechazado.png`. Luego deshacer el commit local con `git reset --hard origin/main`.
-3. **Tags protegidos:**
+## Paso 5 — B05: permisos
+1. **Lectura** (ventana privada, sin sesión): el sitio se ve; `https://github.com/thomasT-maker/Infra-Nube-Proyecto-Estud-IA/settings` da **404** → `B05_lectura_sin_sesion.png`.
+2. **La cuenta de pruebas no puede publicar directo** (navegador B): abrir `docs/index.html` → ✏️ → **Commit changes…** La opción *Commit directly to the main branch* aparece bloqueada o, si se intenta, GitHub la rechaza por la regla → `B05_commit_directo_bloqueado.png`. Cancelar sin guardar.
+3. **La cuenta de pruebas no ve la configuración** (navegador B): en el repo **no aparece la pestaña Settings** → `B05_sin_settings.png`.
+4. **Tags protegidos** (terminal, con la cuenta de pruebas):
    ```
    git fetch --tags
-   git push origin --delete v1.0.0
+   git push https://tabordathomas-maker@github.com/thomasT-maker/Infra-Nube-Proyecto-Estud-IA.git --delete v1.0.0
    ```
-   Debe ser **rechazado** → `B05_tag_protegido.png`.
-4. **Administración:** el colaborador no ve la pestaña **Settings** del repo → captura `B05_sin_settings.png`.
-5. PR de evidencia con la sección B05 de la bitácora.
+   (Si pide iniciar sesión, entrar con **tabordathomas-maker**.) Debe salir **rechazado** por *repository rule violations* → `B05_tag_protegido.png`. Comprobar en **Releases** que `v1.0.0` sigue ahí.
+5. **Administración** (navegador A): Settings → **Rules** → captura de los dos rulesets activos → `B05_rulesets_admin.png`.
+6. **B**, rama `prueba-b05-permisos`: subir las capturas y llenar **B05** → **A** aprueba → merge.
 
-## Paso 6 — B06: repetibilidad (`juanpati913-sketch`)
+## Paso 6 — B06: repetibilidad
 
-Repetir **B04 completo** (PR de error → revert → evidencia) **solo con `PROCEDIMIENTOS.md`**, sin que nadie le explique. Capturas `B06_error.png` y `B06_recuperado.png`, horas de inicio y fin. En la sección B06 anotar las dudas que tuvo; si algo del procedimiento no se entendía, corregirlo en `PROCEDIMIENTOS.md` en el mismo PR.
+La guía pide que **otro integrante** repita un procedimiento solo con las instrucciones. **Una segunda cuenta de la misma persona no cumple eso.**
 
-> Antes de B06, el admin debe revisar y fusionar (o cerrar) el PR #5, que modifica `PROCEDIMIENTOS.md`, para que B06 se haga con la versión final de las instrucciones.
+- **Opción recomendada:** pedirle a un compañero (Andrés, Juan o Simón) que repita **B04** leyendo solo `PROCEDIMIENTOS.md`, con sus capturas y sus horas. El admin aprueba sus PR.
+- **Si nadie puede:** marcar B06 como **"No realizado"** en la bitácora, explicar por qué y dejarlo como pendiente para el encuentro 3. Es mejor reportarlo así que presentarlo como cumplido.
+
+## Paso 7 — Cierre
+1. **B**, rama `cierre-bitacora`: llenar **Registro del equipo** (integrantes, cuentas y roles, incluida la nota de transparencia) y **Cierre** (qué funciona, pendientes y mejoras para el encuentro 3).
+2. **A**: aprobar → merge.
+3. **A**: **Branches** → borrar 🗑️ las ramas ya fusionadas (`estructura-inicial`, `actualizar-v2`, `bitacora-b01`, `juanpati913-sketch-patch-1`, `pruebas-b01-b06`, `prueba-…`).
 
 ---
 
-## Lista de revisión del admin (antes de aprobar cada PR)
+## Lista de revisión del admin (antes de cada *Approve*)
 
-- [ ] Cambia **solo** los archivos esperados (`docs/index.html` solo en PR de B02 y B04/B06; en los demás, solo `documentacion/`).
-- [ ] La sección de la bitácora es la de su prueba y no borra la de otro.
-- [ ] Las imágenes abren en la vista **Files changed** y no muestran credenciales.
-- [ ] No hay ZIP, PDF ni carpeta `respaldos/` en el PR.
-- [ ] En PR que tocan `docs/`: después del merge, revisar **Actions** (✅) y el sitio en ventana privada.
+- [ ] **Files changed** toca solo lo esperado: `docs/index.html` solo en B02 y en los PR de error/revert; en los demás, solo `documentacion/` (y `README.md` en B02).
+- [ ] En la bitácora cambia **solo la sección de esa prueba**.
+- [ ] Las imágenes abren y **no muestran contraseñas, tokens ni códigos**.
+- [ ] No hay **ZIP, PDF, `respaldos/` ni `trabajo/`**.
+- [ ] Las horas tienen sentido (el fin es posterior al inicio).
+- [ ] Si tocó `docs/`: después del merge, **Actions** ✅ y sitio en **ventana privada** (si se ve la versión anterior: Ctrl+Shift+R o esperar unos minutos, por la caché de ~10 min).
+
+## Si algo sale mal
+
+| Problema | Qué hacer |
+|---|---|
+| El sitio quedó roto | **B** abre el PR **Revert** → **A** aprueba → merge. |
+| No se puede aprobar ("can't approve your own PR") | El PR lo abrió la cuenta equivocada: ciérralo y ábrelo desde el **navegador B**. |
+| *"This branch has conflicts"* | **Resolve conflicts** → conservar ambas secciones → **Mark as resolved** → **Commit merge**. |
+| La cuenta de pruebas no puede crear ramas | No ha aceptado la invitación de colaborador. |
+| GitHub no responde | Último ZIP de Drive → `PROCEDIMIENTOS.md` §4.5 → demo local. |
