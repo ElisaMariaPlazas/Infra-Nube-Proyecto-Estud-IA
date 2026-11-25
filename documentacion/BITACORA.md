@@ -67,10 +67,17 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 
 - **Evidencia:**
 
+  Sitio publicado con la versión 2 (captura del equipo, barra de direcciones visible):
+
   ![B02: versión 2 publicada](evidencias/B02_v2_publicada.png)
 
-- **¿Cumple?** Sí, con observación: el contenido v2 está publicado y se ve en la URL, pero falta la marca `v2.0.0` en el pie y el tag `v2.0.0`.
-- **Error encontrado y ajuste:** (1) el pie quedó sin `v2.0.0`; se corrige con un PR pequeño que agregue `<br><small>v2.0.0</small>` antes de `</footer>` en `docs/index.html`. (2) Falta crear el tag `v2.0.0` sobre el commit publicado.
+  Punto de recuperación `v2.0.0`, creado el 25/11/2026 a las 4:43 p. m. (Colombia) por el admin sobre el commit `2676ef1`, el merge del PR #4:
+
+  ![B02: release v2.0.0](evidencias/B02_tag_v2_release.png)
+
+- **¿Cumple?** Sí. La versión 2 se publicó por PR con aprobación del admin, se ve en la URL pública y quedó marcada con el tag `v2.0.0`.
+- **Observación y decisión:** el pie de la versión 2 **no** muestra la marca `v2.0.0`, porque se copió `sitio_v2/index.html` tal cual. Como la guía solo pide comprobar que aparece "Versión 2" y los tags no se pueden mover, se decidió **no** modificar el pie y etiquetar el commit que ya estaba publicado y verificado. Así el tag coincide exactamente con lo que muestra la captura. La versión del sitio se identifica por el tag y por el texto "Versión 2" del cuerpo.
+- **Error encontrado y ajuste:** ninguno en la publicación. El tag `v2.0.0` se creó después de la prueba, el 25/11, y no al momento del merge.
 - **Resultado al repetir la prueba:** *[completar]*
 
 ## B03 — Respaldo
