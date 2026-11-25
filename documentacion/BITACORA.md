@@ -20,6 +20,8 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 
 ## B01 — Publicación
 
+**Resumen:** la versión 1 quedó publicada en GitHub Pages desde la carpeta `/docs` de `main` a las 10:07 a. m. del 21/11/2026. La dirección pública abre y muestra "Versión 1", el pie "v1.0.0", el título en morado y las dos experiencias. Es una publicación en la **nube** (GitHub Pages), no local. El tag `v1.0.0` se creó el 25/11/2026 a las 4:31 p. m. sobre el commit `a1c62ac` (merge del PR #1).
+
 - **Qué queremos comprobar:** el sitio abre en la dirección pública con la versión inicial y sus estilos.
 - **Versión y estado inicial:** v1.0.0 en `docs/` de `main`; Pages recién activado.
 - **Pasos para repetirla:** [PROCEDIMIENTOS.md §0 y §1](PROCEDIMIENTOS.md).
@@ -39,11 +41,17 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 
   ![B01: verificación sin sesión](evidencias/B01_v1_verificacion_sin_sesion.png)
 
+  Punto de recuperación `v1.0.0`, creado el 25/11/2026 a las 4:31 p. m. sobre `a1c62ac`:
+
+  ![B01: release v1.0.0](evidencias/B01_tag_v1_release.png)
+
 - **¿Cumple?** Sí
-- **Error encontrado y ajuste:** ninguno en la publicación. Pendiente: crear el tag `v1.0.0` sobre el commit publicado `a1c62ac` (*Merge pull request #1*) como punto de recuperación.
-- **Resultado al repetir la prueba:** se repitió en dos navegadores distintos (el del integrante y uno sin sesión de GitHub) con el mismo resultado.
+- **Error encontrado y ajuste:** en la publicación no hubo errores. Dos ajustes de documentación: (1) la captura del navegador integrado no mostraba la barra de direcciones, así que se agregó una franja con la URL y la hora; (2) el tag `v1.0.0`, que estaba pendiente, se creó el 25/11/2026 sobre el commit publicado `a1c62ac`.
+- **Resultado al repetir la prueba:** se verificó dos veces, desde el navegador del equipo y desde un navegador sin sesión de GitHub, con el mismo resultado. **No la repitió todavía otro integrante siguiendo las instrucciones:** esa repetición corresponde a B06 y queda pendiente.
 
 ## B02 — Actualización
+
+**Resumen:** la versión 2 se publicó por Pull Request. Andrés propuso el cambio en el PR #4, el admin lo aprobó a las 11:30 a. m. del 21/11/2026 y Pages lo publicó en 24 segundos. La dirección pública muestra "Versión 2" y la nueva experiencia *Ruta de espacios verdes*. El tag `v2.0.0` se creó el 25/11/2026 sobre el commit `2676ef1`. Después de esta prueba, el PR #8 (25/11) dejó `main` con el CSS dentro de `index.html`; ver "Error encontrado".
 
 - **Qué queremos comprobar:** la versión 2 se publica por PR y el cambio se ve en la URL.
 - **Quién la hizo:** `andrezg876-lang` propuso el cambio; `thomasT-maker` (admin) lo revisó, aprobó e hizo el merge.
@@ -77,8 +85,11 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 
 - **¿Cumple?** Sí. La versión 2 se publicó por PR con aprobación del admin, se ve en la URL pública y quedó marcada con el tag `v2.0.0`.
 - **Observación y decisión:** el pie de la versión 2 **no** muestra la marca `v2.0.0`, porque se copió `sitio_v2/index.html` tal cual. Como la guía solo pide comprobar que aparece "Versión 2" y los tags no se pueden mover, se decidió **no** modificar el pie y etiquetar el commit que ya estaba publicado y verificado. Así el tag coincide exactamente con lo que muestra la captura. La versión del sitio se identifica por el tag y por el texto "Versión 2" del cuerpo.
-- **Error encontrado y ajuste:** ninguno en la publicación. El tag `v2.0.0` se creó después de la prueba, el 25/11, y no al momento del merge.
-- **Resultado al repetir la prueba:** *[completar]*
+- **Error encontrado y ajuste:**
+  1. El pie de la versión 2 no dice `v2.0.0`, porque se copió `sitio_v2/index.html` sin esa marca. Se decidió no cambiarlo y etiquetar el commit ya verificado. La versión se identifica por el tag y por el texto "Versión 2".
+  2. El tag `v2.0.0` se creó el 25/11/2026, después de la prueba, y no al momento del merge.
+  3. **Observación posterior:** el PR #8 ("Volver a la version 1", 25/11/2026, 4:28 p. m.) reemplazó el contenido de `docs/index.html` por el CSS. El commit `2676ef1` y el tag `v2.0.0` no se ven afectados, pero `main` sí, y el sitio publicado muestra texto de código en lugar del catálogo. Pendiente: revertir el PR #8 antes de seguir con las demás pruebas.
+- **Resultado al repetir la prueba:** no se ha repetido todavía. La repetición por otro integrante, siguiendo solo `PROCEDIMIENTOS.md`, corresponde a B06 y queda pendiente.
 
 ## B03 — Respaldo
 
