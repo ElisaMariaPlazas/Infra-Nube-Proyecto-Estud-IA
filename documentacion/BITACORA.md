@@ -125,7 +125,7 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 
 ## B04 — Recuperación
 
-**Resumen:** se provocó un error publicado en `main` con el PR #10 ("B04: error simulado") y se recuperó con un *revert* (PR #11). La URL pública volvió a mostrar la versión 2 con sus estilos, idéntica al commit `2676ef1`. El error estuvo en línea unos 4 minutos, medidos entre los dos merges. La hora exacta en que el sitio mostró la versión correcta no quedó anotada en el momento; se toma del historial de commits (ver "Duración").
+**Resumen:** se provocó un error publicado en `main` con el PR #10 ("B04: error simulado") y se recuperó con un *revert* (PR #11). La URL pública volvió a mostrar la versión 2 con sus estilos, idéntica al commit `2676ef1`. El error estuvo en línea unos 4 minutos, según las horas de los despliegues en GitHub Actions (ver "Tiempos").
 
 - **Qué queremos comprobar:** después de un error publicado, se recupera la versión correcta y se mide el tiempo.
 - **Versión y estado inicial:** v2.0.0 publicada (tag `v2.0.0`, commit `2676ef1`), con "Versión 2" y los estilos morados.
@@ -133,16 +133,18 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 - **Pasos para repetirla:** [PROCEDIMIENTOS.md §4](PROCEDIMIENTOS.md).
 - **Resultado esperado:** la URL vuelve a mostrar la versión del tag elegido, con estilos.
 - **Método usado:** *revert*. Se creó el PR #11 ("Revert 'B04: error simulado'") desde el PR #10 ya fusionado; el admin lo aprobó y lo fusionó. Los tags `v1.0.0` y `v2.0.0` no se tocaron.
-- **Tiempos (commits en hora de Colombia, UTC-5):**
+- **Tiempos (hora de Colombia, UTC-5):**
 
-  | Momento | Hora | Commit |
+  | Momento | Hora | Fuente |
   |---|---|---|
-  | Error publicado (merge del PR #10) | 16:48:10 | `34b60a2` |
-  | Revert publicado (merge del PR #11) | 16:52:05 | `10eeaa8` |
+  | Merge del PR #10 (error a `main`) | 16:48:10 | commit `34b60a2` |
+  | Despliegue de Pages con el error (run #7) | ≈ 16:48, duró 23 s | Actions |
+  | Merge del PR #11 (revert a `main`) | 16:52:05 | commit `10eeaa8` |
+  | Despliegue de Pages con la v2 recuperada (run #8) | ≈ 16:52, duró 25 s | Actions |
 
-- **Hora de inicio (error visible en la URL):** ≈ 4:48 p. m. (merge del PR #10). En B02, Pages tardó 21 segundos en publicar, así que el error se vio poco después de ese merge.
-- **Hora de fin (versión correcta en la URL, ventana privada):** ≈ 4:52 p. m. (merge del PR #11) más el tiempo de despliegue. *[pendiente: anotar la hora exacta del ✅ en la pestaña Actions de GitHub, porque no se midió en el momento.]*
-- **Duración:** **≈ 4 minutos** (estimado a partir de los dos merges; el despliegue añade unos segundos). *[pendiente: confirmar con la hora del despliegue.]*
+- **Hora de inicio (error visible en la URL):** ≈ 4:48 p. m. (despliegue #7, que terminó unos 23 s después del merge del PR #10).
+- **Hora de fin (versión correcta en la URL, ventana privada):** ≈ 4:52 p. m. (despliegue #8, que terminó unos 25 s después del merge del PR #11).
+- **Duración:** **≈ 4 minutos** (de 16:48:33 a 16:52:30, unos 3 min 57 s). La pestaña Actions muestra solo horas relativas, así que la precisión es de ±1 minuto. Si se quiere la hora exacta, pasar el cursor sobre cada run en Actions. La hora de la captura de Actions es 17:06 (run #7 "18 minutes ago", run #8 "14 minutes ago").
 - **Versión recuperada:** v2 (commit `2676ef1`). Se comprobó que `docs/index.html` de `main` es idéntico al de ese commit y que `styles.css` también coincide.
 - **Evidencia antes y después:**
 
@@ -154,11 +156,15 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 
   ![B04: versión recuperada](evidencias/B04_recuperado.png)
 
+  Pestaña Actions con los dos despliegues de Pages (run #7 con el error y run #8 con la recuperación):
+
+  ![B04: despliegues en GitHub Actions](evidencias/B04_actions_despliegues.png)
+
 - **Pasos manuales y cuáles automatizaríamos:**
   - *Manuales (hoy):* editar `index.html` en GitHub, abrir el PR, aprobarlo, fusionarlo, abrir el revert, aprobarlo, fusionarlo y comprobar la URL en ventana privada.
   - *Automatizables:* crear el revert desde el último tag válido con un comando o un workflow; comprobar después del despliegue que la URL responde 200 y contiene "Versión 2"; avisar al equipo si falla.
   - *No automatizable sin cambiar la configuración:* la aprobación. La regla `proteger-main` exige un aprobador distinto del autor, y no hay un *bypass* configurado para emergencias. Por eso el admin debe aprobar a mano; en esta prueba el admin aprobó y fusionó el revert en pocos minutos.
-- **¿Cumple?** Sí, con dos observaciones: la hora de fin debe confirmarse en Actions y la duración es una estimación. El punto importante es que la versión correcta quedó publicada por un PR revisado y sin tocar el tag.
+- **¿Cumple?** Sí. La versión correcta quedó publicada por un PR revisado, sin tocar el tag, y la duración (≈ 4 minutos) se midió con los despliegues de Actions.
 - **Error encontrado y ajuste:** ninguno en la recuperación. Se encontró un detalle: el PR #10 se creó desde la rama `main` de la cuenta de pruebas en lugar de una rama propia, y eso no afectó al resultado. Para B06 conviene usar una rama con nombre propio, como indica `PLAN_PRUEBAS.md`.
 - **Resultado al repetir la prueba:** pendiente. La repetición por otro integrante corresponde a B06.
 
