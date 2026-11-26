@@ -93,15 +93,35 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 
 ## B03 — Respaldo
 
+**Resumen:** se creó un respaldo de la versión 2 publicada correctamente (tag `v2.0.0`, commit `2676ef1`). El respaldo se hizo el 26/11/2026 a las 11:49 a. m. (hora de Colombia), a partir del tag y no de `main`, porque `main` tenía el CSS dentro de `index.html` por el PR #8. Las huellas SHA-256 de la copia coinciden con las de los archivos del tag. Se comprimió en un ZIP y se subió a Google Drive.
+
 - **Qué queremos comprobar:** existe una copia íntegra, fuera de GitHub, con ubicación, versión y archivos identificados.
-- **Versión y estado inicial:** *[completar: versión respaldada]*
-- **Pasos para repetirla:** [PROCEDIMIENTOS.md §2](PROCEDIMIENTOS.md).
-- **Resultado esperado:** ZIP en Drive con `index.html`, `styles.css` y `manifest.json`.
-- **Ruta del respaldo local:** *[completar: respaldos/AAAAMMDD_HHMMSS_…]*
-- **Ubicación en Drive y quién tiene acceso:** *[completar]*
-- **Resultado observado:** *[completar]*
-- **Evidencia:** *[completar]*
-- **¿Cumple?** *[completar]*
+- **Versión respaldada:** v2.0.0 (commit `2676ef1`, merge del PR #4).
+- **Ruta del respaldo local:** `respaldos\20261126_114935_473619` (equipo del integrante, rama local `bitacora-b01`).
+- **Archivos incluidos:**
+  - `index.html`: SHA-256 `b6a32ff3f46af4730b7faa17661355ef57d13f337e618de6dd2bedd656ad1302`
+  - `styles.css`: SHA-256 `436b588e09fcbcae2b86a737a64393a81c1f667abeb36e9ebfdd836cc32da022`
+  - `manifest.json`: lista las dos huellas anteriores.
+- **Ubicación en Drive:** archivo `respaldo_v2_20261126.zip`. Según la captura, está en la raíz de "Mi unidad", **no** dentro de la carpeta "Ruta Local - Respaldos (EstudIA)". *[pendiente: moverlo a esa carpeta]*
+- **Quién tiene acceso:** solo la cuenta del admin. *[pendiente: compartir la carpeta con el equipo, sin enlace público]*
+- **Resultado observado:** el `manifest.json` tiene las mismas huellas que los archivos del tag `v2.0.0`. Se comprobó con `sha256sum` y con `diff` (salida `IGUAL`).
+- **Evidencia:**
+
+  Terminal con el comando `respaldar` y el manifiesto:
+
+  ![B03: terminal con respaldo y manifiesto](evidencias/B03_respaldo_v2_terminal.png)
+
+  Drive con el ZIP subido:
+
+  ![B03: ZIP en Google Drive](evidencias/B03_respaldo_v2_drive.png)
+
+- **¿Cumple?** Sí, con dos pendientes: mover el ZIP a la carpeta compartida y compartir esa carpeta con el equipo.
+- **Error encontrado y ajuste:**
+  1. **Huellas que no coincidían.** Al principio, `trabajo/index.html` tenía la versión 1. El paso `preparar` copia la v1 y el paso de copiar desde el tag no se había ejecutado después. Ajuste: volver a copiar `index.html` desde `v2.0.0` y comprobar con `diff` hasta obtener `IGUAL`.
+  2. **Riesgo evitado.** `main` estaba roto por el PR #8. Respaldar desde `main` habría guardado la versión incorrecta. Ajuste: respaldar desde el tag `v2.0.0`.
+  3. **ZIP fuera de la carpeta.** El archivo quedó en la raíz de Drive. Ajuste pendiente: moverlo a la carpeta compartida.
+- **Uso del tag en este respaldo:** un tag es una marca fija en un commit. `v2.0.0` apunta a `2676ef1`, la versión correcta. Por eso el respaldo se tomó de ahí y no de `main`, que cambia con cada merge.
+- **Resultado al repetir la prueba:** pendiente. La repetición por otro integrante corresponde a B06.
 
 ## B04 — Recuperación
 
