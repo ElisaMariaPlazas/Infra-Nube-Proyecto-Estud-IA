@@ -47,13 +47,19 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 
   ![B01: versión 1 publicada, captura del equipo](evidencias/B01_v1_publicada.png)
 
+  **Descripción:** sitio público con la barra de direcciones visible. Muestra el título "Ruta Local" en morado, "Versión 1", dos experiencias (*Recorrido por las historias del barrio* y *Taller de oficios y memoria*) y el pie con `v1.0.0`.
+
   Verificación complementaria sin sesión, con una franja agregada que indica la URL, la hora y los encabezados HTTP:
 
   ![B01: verificación sin sesión](evidencias/B01_v1_verificacion_sin_sesion.png)
 
+  **Descripción:** la misma versión 1, con una franja agregada que indica la URL, la fecha y hora (21/11/2026, 10:30 a. m.), las respuestas HTTP 200 del sitio y de `styles.css`, y que se consultó sin sesión de GitHub.
+
   Punto de recuperación `v1.0.0`, creado el 25/11/2026 a las 4:31 p. m. sobre `a1c62ac`:
 
   ![B01: release v1.0.0](evidencias/B01_tag_v1_release.png)
+
+  **Descripción:** página de la release "v1.0.0 – Versión 1 publicada", creada por `thomasT-maker` sobre el commit `a1c62ac`, con el código fuente descargable en ZIP y tar.gz.
 
 - **¿Cumple?** Sí
 - **Error encontrado y ajuste:** en la publicación no hubo errores. Dos ajustes de documentación: (1) la captura del navegador integrado no mostraba la barra de direcciones, así que se agregó una franja con la URL y la hora; (2) el tag `v1.0.0`, que estaba pendiente, se creó el 25/11/2026 sobre el commit publicado `a1c62ac`.
@@ -89,9 +95,13 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 
   ![B02: versión 2 publicada](evidencias/B02_v2_publicada.png)
 
+  **Descripción:** sitio público con "Versión 2" y tres experiencias; la nueva es *Ruta de espacios verdes*. Los estilos cargan y el pie no muestra número de versión.
+
   Punto de recuperación `v2.0.0`, creado el 25/11/2026 a las 4:43 p. m. (Colombia) por el admin sobre el commit `2676ef1`, el merge del PR #4:
 
   ![B02: release v2.0.0](evidencias/B02_tag_v2_release.png)
+
+  **Descripción:** página de la release "v2.0.0 – Versión 2 publicada", vista sin sesión (aparecen los botones *Sign in* y *Sign up*), sobre el commit `2676ef1` y con referencia al PR #4.
 
 - **¿Cumple?** Sí. La versión 2 se publicó por PR con aprobación del admin, se ve en la URL pública y quedó marcada con el tag `v2.0.0`.
 - **Observación y decisión:** el pie de la versión 2 **no** muestra la marca `v2.0.0`, porque se copió `sitio_v2/index.html` tal cual. Como la guía solo pide comprobar que aparece "Versión 2" y los tags no se pueden mover, se decidió **no** modificar el pie y etiquetar el commit que ya estaba publicado y verificado. Así el tag coincide exactamente con lo que muestra la captura. La versión del sitio se identifica por el tag y por el texto "Versión 2" del cuerpo.
@@ -112,7 +122,7 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
   - `index.html`: SHA-256 `b6a32ff3f46af4730b7faa17661355ef57d13f337e618de6dd2bedd656ad1302`
   - `styles.css`: SHA-256 `436b588e09fcbcae2b86a737a64393a81c1f667abeb36e9ebfdd836cc32da022`
   - `manifest.json`: lista las dos huellas anteriores.
-- **Ubicación en Drive:** archivo `respaldo_v2_20261126.zip`. Según la captura, está en la raíz de "Mi unidad", **no** dentro de la carpeta "Ruta Local - Respaldos (EstudIA)". *[pendiente: moverlo a esa carpeta]*
+- **Ubicación en Drive:** archivo `respaldo_v2_20261126.zip`. La captura no muestra en qué carpeta está. *[pendiente: confirmar que esté en "Ruta Local - Respaldos (EstudIA)"]*
 - **Quién tiene acceso:** solo la cuenta del admin. *[pendiente: compartir la carpeta con el equipo, sin enlace público]*
 - **Resultado observado:** el `manifest.json` tiene las mismas huellas que los archivos del tag `v2.0.0`. Se comprobó con `sha256sum` y con `diff` (salida `IGUAL`).
 - **Evidencia:**
@@ -121,15 +131,19 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 
   ![B03: terminal con respaldo y manifiesto](evidencias/B03_respaldo_v2_terminal.png)
 
+  **Descripción:** terminal con el comando `respaldar`, la ruta creada (`respaldos\20261126_114935_473619`) y el contenido de `manifest.json` con las huellas SHA-256 de `index.html` y `styles.css`.
+
   Drive con el ZIP subido:
 
   ![B03: ZIP en Google Drive](evidencias/B03_respaldo_v2_drive.png)
 
-- **¿Cumple?** Sí, con dos pendientes: mover el ZIP a la carpeta compartida y compartir esa carpeta con el equipo.
+  **Descripción:** página principal de Google Drive, en "Archivos sugeridos", con `respaldo_v2_20261126.zip` propio, creado a las 11:56 a. m. La captura no muestra en qué carpeta está ni con quién se comparte.
+
+- **¿Cumple?** Sí, con dos pendientes: confirmar que el ZIP esté en la carpeta de respaldos y compartir esa carpeta con el equipo.
 - **Error encontrado y ajuste:**
   1. **Huellas que no coincidían.** Al principio, `trabajo/index.html` tenía la versión 1. El paso `preparar` copia la v1 y el paso de copiar desde el tag no se había ejecutado después. Ajuste: volver a copiar `index.html` desde `v2.0.0` y comprobar con `diff` hasta obtener `IGUAL`.
   2. **Riesgo evitado.** `main` estaba roto por el PR #8. Respaldar desde `main` habría guardado la versión incorrecta. Ajuste: respaldar desde el tag `v2.0.0`.
-  3. **ZIP fuera de la carpeta.** El archivo quedó en la raíz de Drive. Ajuste pendiente: moverlo a la carpeta compartida.
+  3. **Ubicación sin evidencia.** La captura de Drive no muestra la carpeta del ZIP. Ajuste pendiente: confirmar que esté en la carpeta de respaldos y capturarlo allí.
 - **Uso del tag en este respaldo:** un tag es una marca fija en un commit. `v2.0.0` apunta a `2676ef1`, la versión correcta. Por eso el respaldo se tomó de ahí y no de `main`, que cambia con cada merge.
 - **Resultado al repetir la prueba:** pendiente. La repetición por otro integrante corresponde a B06.
 
@@ -162,13 +176,19 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 
   ![B04: error publicado](evidencias/B04_error.png)
 
+  **Descripción:** la URL pública muestra "Catálogo incorrecto" y "Versión de error para practicar la restauración.", sin estilos.
+
   Versión recuperada tras el revert, con la barra de direcciones visible:
 
   ![B04: versión recuperada](evidencias/B04_recuperado.png)
 
+  **Descripción:** la misma URL vuelve a mostrar "Versión 2", las tres experiencias y los estilos.
+
   Pestaña Actions con los dos despliegues de Pages (run #7 con el error y run #8 con la recuperación):
 
   ![B04: despliegues en GitHub Actions](evidencias/B04_actions_despliegues.png)
+
+  **Descripción:** pestaña *Actions* con los despliegues de Pages. Los números 7 (el error) y 8 (la recuperación) terminaron correctamente, en 23 s y 25 s. El reloj del equipo marca 17:06 del 26/11/2026.
 
 - **Pasos manuales y cuáles automatizaríamos:**
   - *Manuales (hoy):* editar `index.html` en GitHub, abrir el PR, aprobarlo, fusionarlo, abrir el revert, aprobarlo, fusionarlo y comprobar la URL en ventana privada.
@@ -201,29 +221,47 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 
   ![B05: sitio publicado](evidencias/B05_lectura_sitio.png)
 
+  **Descripción:** sitio público con "Versión 2", las tres experiencias y los estilos. La imagen no permite saber si había una sesión iniciada.
+
   Cambio directo a `main` bloqueado:
 
   ![B05: commit directo bloqueado](evidencias/B05_commit_directo_bloqueado.png)
+
+  **Descripción:** la cuenta de pruebas edita `README.md` y GitHub avisa que no puede guardar en `main` porque es una rama protegida; solo ofrece crear una rama y un Pull Request.
 
   Borrado del tag rechazado:
 
   ![B05: borrado de tag rechazado](evidencias/B05_tag_protegido.png)
 
+  **Descripción:** PowerShell con el intento de borrar `v1.0.0` usando la URL de la cuenta de pruebas. GitHub responde `GH013`, *Cannot delete this tag*, y rechaza el envío.
+
   Cuenta de pruebas: pestañas del repositorio y página de configuración:
 
   ![B05: pestañas vistas por la cuenta de pruebas](evidencias/B05_pestanas_cuenta_pruebas.png)
 
+  **Descripción:** página principal del repositorio con la sesión de `tabordathomas-maker`. La pestaña *Settings* sí aparece.
+
   ![B05: configuración sin acceso](evidencias/B05_settings_cuenta_pruebas.png)
+
+  **Descripción:** *Settings* abierto por la cuenta de pruebas: *"You don't have access to repository options"*; en el menú lateral solo figura *Secrets and variables*.
 
   Reglas vistas por el admin:
 
   ![B05: proteger-main, estado y destino](evidencias/B05_rulesets_main_1.png)
 
+  **Descripción:** `proteger-main` en estado *Active*, sin excepciones (*Bypass list* vacía) y aplicada a `main`.
+
   ![B05: proteger-main, reglas](evidencias/B05_rulesets_main_2.png)
+
+  **Descripción:** reglas marcadas en `proteger-main`: impedir borrados, exigir Pull Request antes de fusionar y bloquear *force push*.
 
   ![B05: proteger-versiones, estado y destino](evidencias/B05_rulesets_tags_1.png)
 
+  **Descripción:** `proteger-versiones` en estado *Active*, sin excepciones y aplicada a `v*` (`v1.0.0` y `v2.0.0`).
+
   ![B05: proteger-versiones, reglas](evidencias/B05_rulesets_tags_2.png)
+
+  **Descripción:** reglas marcadas en `proteger-versiones`: impedir actualizaciones y borrados, y bloquear *force push*.
 
 - **¿Cumple?** Parcialmente. La actualización y la administración quedaron comprobadas. Para la lectura falta evidencia de que, **sin sesión**, el sitio se ve y la configuración no se puede abrir.
 - **Error encontrado y ajuste:**
@@ -259,7 +297,7 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 - **Qué quedó como propuesta o pendiente:**
   - B05: evidencia de lectura sin sesión y del número de aprobaciones de `proteger-main`.
   - B06: repetición por otro integrante.
-  - B03: mover el ZIP a la carpeta de respaldos y compartirla con el equipo, sin enlace público.
+  - B03: confirmar que el ZIP esté en la carpeta de respaldos y compartirla con el equipo, sin enlace público.
 - **Procedimiento para recrear y recuperar:** [PROCEDIMIENTOS.md](PROCEDIMIENTOS.md).
 - **Limitaciones y cambios para el encuentro 3** (propuestas, no implementadas):
   - Usar una organización gratuita con roles separados (Read, Write, Admin).
