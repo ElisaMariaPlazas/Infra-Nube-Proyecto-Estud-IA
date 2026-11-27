@@ -4,8 +4,18 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 
 ## Registro del equipo
 
-- **Equipo:** *[completar]*
-- **Integrantes y responsabilidades:** *[completar: nombre — usuario GitHub — rol (admin / revisor / actualiza / documenta / repite B06)]*
+- **Equipo:** *[completar: nombre del equipo]*
+- **Integrantes y responsabilidades:**
+
+  | Nombre | Usuario GitHub | Participación |
+  |---|---|---|
+  | Thomas Taborda Castañeda | `thomasT-maker` | Admin y revisor |
+  | Thomas Taborda Castañeda | `tabordathomas-maker` | Cuenta de pruebas: propone los cambios |
+  | Andrés | `andrezg876-lang` | Actualización a la versión 2 (B02, PR #4) |
+  | Juan | `juanpati913-sketch` | Nota en el README (PR #6) |
+  | Simón Castrillón | *[completar usuario]* | Mejora de `PROCEDIMIENTOS.md` (PR #5) |
+
+- **Transparencia sobre las cuentas:** `thomasT-maker` y `tabordathomas-maker` son de la misma persona. Con ellas se demuestra la separación de permisos (quien propone no publica sin la aprobación de otra cuenta), no la separación de personas.
 - **Fecha:** 21 de noviembre de 2026 (encuentro 2)
 - **Modalidad:** nube (GitHub Pages)
 - **Arquitectura elegida y motivo:** sitio estático publicado con GitHub Pages desde `/docs` de `main`, versionado con Git y tags, respaldo independiente en Google Drive. Motivos en el [README](../README.md) y el [esquema](ESQUEMA.md).
@@ -88,7 +98,7 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 - **Error encontrado y ajuste:**
   1. El pie de la versión 2 no dice `v2.0.0`, porque se copió `sitio_v2/index.html` sin esa marca. Se decidió no cambiarlo y etiquetar el commit ya verificado. La versión se identifica por el tag y por el texto "Versión 2".
   2. El tag `v2.0.0` se creó el 25/11/2026, después de la prueba, y no al momento del merge.
-  3. **Observación posterior:** el PR #8 ("Volver a la version 1", 25/11/2026, 4:28 p. m.) reemplazó el contenido de `docs/index.html` por el CSS. El commit `2676ef1` y el tag `v2.0.0` no se ven afectados, pero `main` sí, y el sitio publicado muestra texto de código en lugar del catálogo. Pendiente: revertir el PR #8 antes de seguir con las demás pruebas.
+  3. **Observación posterior:** el PR #8 ("Volver a la version 1", 25/11/2026, 4:28 p. m.) reemplazó el contenido de `docs/index.html` por el CSS. El commit `2676ef1` y el tag `v2.0.0` no se ven afectados, pero `main` sí, y el sitio publicado muestra texto de código en lugar del catálogo. Resuelto el 26/11/2026 con el PR #9 (revert del PR #8).
 - **Resultado al repetir la prueba:** no se ha repetido todavía. La repetición por otro integrante, siguiendo solo `PROCEDIMIENTOS.md`, corresponde a B06 y queda pendiente.
 
 ## B03 — Respaldo
@@ -170,29 +180,88 @@ Basada en `PLANTILLA_EVIDENCIAS.md` del paquete del reto. Los campos marcados co
 
 ## B05 — Permisos
 
+**Resumen:** el 26/11/2026 por la noche se probó qué puede hacer cada nivel de acceso. La cuenta de pruebas (`tabordathomas-maker`) no pudo guardar directamente en `main` ni borrar el tag `v1.0.0`, y no tiene acceso a las opciones de administración del repositorio. Queda por capturar la lectura sin sesión.
+
 - **Qué queremos comprobar:** lectura, actualización y administración están separadas.
 - **Pasos para repetirla:** [PERMISOS.md, "Cómo demostrarlo"](PERMISOS.md).
-- **Resultado esperado:** sin sesión se ve el sitio y no se edita; un push directo a `main` y el borrado de un tag `v*` son rechazados; solo el admin ve la configuración.
-- **Resultado observado:** *[completar]*
-- **Evidencia (sin credenciales):** *[completar]*
-- **¿Cumple?** *[completar]*
-- **Limitación:** en repo personal no hay rol "solo lectura" dentro de GitHub; ver PERMISOS.md.
+- **Resultado esperado:** sin sesión se ve el sitio y no se edita; un cambio directo a `main` y el borrado de un tag `v*` son rechazados; solo el admin administra el repositorio.
+- **Resultado observado y explicación:**
+
+  | Prueba | Qué pasó | Por qué pasa |
+  |---|---|---|
+  | Ver el sitio publicado | La URL muestra "Versión 2", las tres experiencias y los estilos | GitHub Pages es público: para leer no se necesita permiso. La captura no permite saber si la ventana tenía sesión iniciada |
+  | Guardar directo en `main` (cuenta de pruebas) | GitHub avisa *"You can't commit to main because it is a protected branch"* y solo ofrece crear una rama y un Pull Request. No quedó ninguna rama nueva ni cambio en `main` | La regla `proteger-main` exige que todo cambio entre por Pull Request |
+  | Borrar el tag `v1.0.0` (usando la URL de la cuenta de pruebas) | Rechazado: `GH013: Repository rule violations`, *"Cannot delete this tag"*. El tag sigue existiendo en `a1c62ac` | La regla `proteger-versiones` impide borrar los tags `v*` |
+  | Abrir *Settings* (cuenta de pruebas) | La pestaña **sí aparece**, pero dice *"You don't have access to repository options"* y solo ofrece *Secrets and variables* | Un colaborador con permiso de escritura puede gestionar secretos de Actions, pero no la configuración, las reglas ni los colaboradores |
+  | Ver las reglas (admin) | `proteger-main` activa sobre `main`: exige Pull Request, impide borrar y forzar cambios. `proteger-versiones` activa sobre `v*`: impide actualizar, borrar y forzar cambios. Ambas sin excepciones (*Bypass list* vacía) | Solo el dueño del repositorio ve y cambia estas reglas |
+
+- **Evidencia (sin credenciales):**
+
+  Lectura del sitio publicado:
+
+  ![B05: sitio publicado](evidencias/B05_lectura_sitio.png)
+
+  Cambio directo a `main` bloqueado:
+
+  ![B05: commit directo bloqueado](evidencias/B05_commit_directo_bloqueado.png)
+
+  Borrado del tag rechazado:
+
+  ![B05: borrado de tag rechazado](evidencias/B05_tag_protegido.png)
+
+  Cuenta de pruebas: pestañas del repositorio y página de configuración:
+
+  ![B05: pestañas vistas por la cuenta de pruebas](evidencias/B05_pestanas_cuenta_pruebas.png)
+
+  ![B05: configuración sin acceso](evidencias/B05_settings_cuenta_pruebas.png)
+
+  Reglas vistas por el admin:
+
+  ![B05: proteger-main, estado y destino](evidencias/B05_rulesets_main_1.png)
+
+  ![B05: proteger-main, reglas](evidencias/B05_rulesets_main_2.png)
+
+  ![B05: proteger-versiones, estado y destino](evidencias/B05_rulesets_tags_1.png)
+
+  ![B05: proteger-versiones, reglas](evidencias/B05_rulesets_tags_2.png)
+
+- **¿Cumple?** Parcialmente. La actualización y la administración quedaron comprobadas. Para la lectura falta evidencia de que, **sin sesión**, el sitio se ve y la configuración no se puede abrir.
+- **Error encontrado y ajuste:**
+  1. `PLAN_PRUEBAS.md` esperaba que la cuenta de pruebas no viera la pestaña *Settings*. Sí la ve, con acceso limitado a *Secrets and variables*. Ajuste: comprobar el acceso por lo que permite la página, no por la presencia de la pestaña.
+  2. La captura de `proteger-main` deja plegados los ajustes del Pull Request, así que no muestra el número de aprobaciones exigidas. *[pendiente: captura con "Show additional settings" abierto]*
+- **Limitaciones:**
+  - En un repositorio personal no hay rol de "solo lectura" ni roles intermedios; ver PERMISOS.md.
+  - Todo colaborador puede gestionar los secretos de Actions. Hoy el proyecto no depende de ninguno.
+  - Las dos cuentas usadas son de la misma persona (ver "Registro del equipo").
 
 ## B06 — Repetibilidad
 
+**Estado: pendiente. Todavía no se ha realizado.**
+
 - **Qué queremos comprobar:** otro integrante (que no sea el admin) repite la actualización o la recuperación solo con estas instrucciones.
-- **Quién la repite:** *[completar]*
-- **Procedimiento repetido:** *[actualización / recuperación]*
-- **Resultado observado:** *[completar]*
-- **Dudas que tuvo y qué se corrigió en la documentación:** *[completar]*
-- **Inicio, fin y duración:** *[completar]*
-- **¿Cumple?** *[completar]*
+- **Quién la repite:** pendiente. Debe ser otra persona, no la segunda cuenta del admin.
+- **Procedimiento propuesto:** recuperación ([PROCEDIMIENTOS.md §4](PROCEDIMIENTOS.md)).
+- **Resultado observado:** pendiente.
+- **Dudas que tuvo y qué se corrigió en la documentación:** pendiente.
+- **Inicio, fin y duración:** pendiente.
+- **¿Cumple?** Todavía no se puede evaluar.
 
 ---
 
 ## Cierre
 
-- **Qué funciona realmente:** *[completar]*
-- **Qué quedó como propuesta o pendiente:** *[completar]*
+- **Qué funciona realmente:**
+  - Publicación del sitio con GitHub Pages desde `/docs` de `main` (B01).
+  - Actualización a la versión 2 por Pull Request con aprobación (B02).
+  - Respaldo con huellas SHA-256, comprimido y subido a Google Drive (B03).
+  - Recuperación de un error publicado con *revert*, en unos 4 minutos (B04).
+  - Bloqueo de cambios directos a `main` y del borrado de tags, y administración restringida (B05).
+- **Qué quedó como propuesta o pendiente:**
+  - B05: evidencia de lectura sin sesión y del número de aprobaciones de `proteger-main`.
+  - B06: repetición por otro integrante.
+  - B03: mover el ZIP a la carpeta de respaldos y compartirla con el equipo, sin enlace público.
 - **Procedimiento para recrear y recuperar:** [PROCEDIMIENTOS.md](PROCEDIMIENTOS.md).
-- **Limitaciones y cambios para el encuentro 3:** *[completar. Ideas: organización gratuita con roles Read/Write/Admin; automatizar el respaldo con GitHub Actions; verificación automática de la URL después de cada despliegue]*
+- **Limitaciones y cambios para el encuentro 3** (propuestas, no implementadas):
+  - Usar una organización gratuita con roles separados (Read, Write, Admin).
+  - Automatizar el respaldo con GitHub Actions.
+  - Verificar automáticamente la URL después de cada despliegue.
