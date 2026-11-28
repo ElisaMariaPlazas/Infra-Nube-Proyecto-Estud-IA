@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - simulacion-error
+      - simulacion-error-action
 
 jobs:
   prueba-error:
@@ -17,7 +17,7 @@ jobs:
           mkdir -p "$RUNNER_TEMP/simulacion"
           echo "Sitio funcionando correctamente" > "$RUNNER_TEMP/simulacion/index.html"
           cp "$RUNNER_TEMP/simulacion/index.html" "$RUNNER_TEMP/respaldo.html"
-          echo "Entorno preparado y respaldo creado - git action"
+          echo "Entorno preparado y respaldo creado"
 
       - name: Simular error
         id: error
@@ -31,7 +31,7 @@ jobs:
         if: steps.error.outcome == 'failure'
         run: |
           echo "ALERTA: se detecto un error"
-          echo "Iniciando proceso de recuperacion"
+          echo "Iniciando recuperacion automatica"
 
       - name: Recuperacion automatica
         if: steps.error.outcome == 'failure'
