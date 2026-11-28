@@ -1,0 +1,46 @@
+
+name: Simulacion automatica de errores
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - simulacion-error
+
+jobs:
+  prueba-error:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Preparar entorno
+        run: |
+          mkdir -p "$RUNNER_TEMP/simulacion"
+          echo "Sitio funcionando correctamente" > "$RUNNER_TEMP/simulacion/index.html"
+          cp "$RUNNER_TEMP/simulacion/index.html" "$RUNNER_TEMP/respaldo.html"
+          echo "Entorno preparado y respaldo creado - git action"
+
+      - name: Simular error
+        id: error
+        continue-on-error: true
+        run: |
+          rm "$RUNNER_TEMP/simulacion/index.html"
+          echo "ERROR: archivo principal eliminado"
+          test -f "$RUNNER_TEMP/simulacion/index.html"
+
+      - name: Detectar error
+        if: steps.error.outcome == 'failure'
+        run: |
+          echo "ALERTA: se detecto un error"
+          echo "Iniciando proceso de recuperacion"
+
+      - name: Recuperacion automatica
+        if: steps.error.outcome == 'failure'
+        run: |
+          cp "$RUNNER_TEMP/respaldo.html" "$RUNNER_TEMP/simulacion/index.html"
+          echo "Archivo recuperado correctamente"
+
+      - name: Verificar recuperacion
+        run: |
+          test -f "$RUNNER_TEMP/simulacion/index.html"
+          echo "RECUPERACION EXITOSA"
+          cat "$RUNNER_TEMP/simulacion/index.html"
